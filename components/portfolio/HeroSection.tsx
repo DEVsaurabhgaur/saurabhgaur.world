@@ -310,13 +310,13 @@ export default function HeroSection() {
           <div
             className="inline-flex items-center gap-2.5 px-4 py-2 rounded clip-cyber-sm select-none hero-enter"
             style={{
-              background: 'rgba(0, 245, 255, 0.04)',
-              border: '1px solid rgba(0, 245, 255, 0.25)',
+              background: 'rgba(157, 255, 0, 0.04)',
+              border: '1px solid rgba(157, 255, 0, 0.25)',
               fontFamily: 'var(--font-mono)',
               animationDelay: '0ms',
             }}>
-            <span className="w-2 h-2 rounded-full" style={{ background: '#00FF88', boxShadow: '0 0 8px #00FF88', animation: 'blink 1.5s ease-in-out infinite' }} />
-            <span className="text-[10px] tracking-widest uppercase font-bold" style={{ color: 'var(--accent)' }}>
+            <span className="w-2 h-2 rounded-full" style={{ background: '#9DFF00', boxShadow: '0 0 8px #9DFF00', animation: 'blink 1.5s ease-in-out infinite' }} />
+            <span className="text-[10px] tracking-widest uppercase font-bold text-kiwi">
               INDEPENDENT AI PRODUCT DEVELOPER · OPEN TO REMOTE
             </span>
           </div>
@@ -428,10 +428,10 @@ export default function HeroSection() {
               <div>
                 <div className="flex justify-between mb-1.5">
                   <span className="text-slate-400 flex items-center gap-1.5"><Radio size={12} /> NET_LATENCY_MS</span>
-                  <span className={`font-bold ${netLatency < 40 ? 'text-emerald-400' : netLatency < 100 ? 'text-yellow-400' : 'text-rose-400'}`}>{netLatency.toFixed(0)} ms</span>
+                  <span className={`font-bold ${netLatency < 40 ? 'text-kiwi' : netLatency < 100 ? 'text-yellow-400' : 'text-rose-400'}`}>{netLatency.toFixed(0)} ms</span>
                 </div>
                 <div className="w-full bg-cyan-950/50 h-2.5 rounded overflow-hidden border border-emerald-500/10">
-                  <div className={`h-full transition-all duration-700 ${netLatency < 40 ? 'bg-emerald-400 shadow-[0_0_8px_#00ff88]' : netLatency < 100 ? 'bg-yellow-400 shadow-[0_0_8px_#facc15]' : 'bg-rose-500 shadow-[0_0_8px_#f43f5e]'}`} style={{ width: `${Math.min(100, (netLatency / 180) * 100)}%` }} />
+                  <div className={`h-full transition-all duration-700 ${netLatency < 40 ? 'bg-kiwi shadow-[0_0_8px_#9dff00]' : netLatency < 100 ? 'bg-yellow-400 shadow-[0_0_8px_#facc15]' : 'bg-rose-500 shadow-[0_0_8px_#f43f5e]'}`} style={{ width: `${Math.min(100, (netLatency / 180) * 100)}%` }} />
                 </div>
               </div>
             </div>
@@ -443,8 +443,8 @@ export default function HeroSection() {
               </div>
               <div className="flex-1 font-mono text-[10px] space-y-2 text-slate-400 w-full">
                 <div className="flex items-center gap-1.5 bg-slate-950/30 border border-slate-800 p-1.5 rounded">
-                  <Radio size={12} className="text-emerald-400 animate-pulse" />
-                  <div><p className="text-slate-500">RADAR_SWEEP</p><p className="text-emerald-400 font-bold">LOCK_STABLE</p></div>
+                  <Radio size={12} className="text-kiwi animate-pulse" />
+                  <div><p className="text-slate-500">RADAR_SWEEP</p><p className="text-kiwi font-bold">LOCK_STABLE</p></div>
                 </div>
                 <div className="flex items-center gap-1.5 bg-slate-950/30 border border-slate-800 p-1.5 rounded">
                   <Shield size={12} className="text-cyan-400" />
@@ -462,7 +462,7 @@ export default function HeroSection() {
               <span className="text-cyan-500/70 border-b border-cyan-500/10 pb-1.5 block font-bold tracking-wider">{'>>'} SYSTEM EVENT LOGGER:</span>
               <div className="space-y-1">
                 {hudLogs.map((log, index) => (
-                  <div key={index} className="truncate text-emerald-400/90 flex gap-2">
+                  <div key={index} className="truncate text-kiwi/90 flex gap-2">
                     <span className="text-cyan-500/50 select-none">❯</span>
                     <span className="truncate">{log}</span>
                   </div>

@@ -89,7 +89,7 @@ export default function CyberTerminal({ isOpen, onClose }: Props) {
       ctx.fillStyle = 'rgba(7, 11, 15, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      ctx.fillStyle = '#00F5FF' // Cyan matrix theme matching --accent
+      ctx.fillStyle = '#9DFF00' // Kiwi neon matrix rain override
       ctx.font = fontSize + 'px monospace'
 
       for (let i = 0; i < rainDrops.length; i++) {
@@ -304,7 +304,7 @@ export default function CyberTerminal({ isOpen, onClose }: Props) {
               let color = 'text-slate-300'
               if (log.type === 'input') color = 'text-cyan-300 font-bold'
               else if (log.type === 'error') color = 'text-rose-500 font-bold'
-              else if (log.type === 'success') color = 'text-emerald-400 font-bold'
+              else if (log.type === 'success') color = 'text-kiwi font-bold'
               
               return (
                 <div key={index} className={color}>

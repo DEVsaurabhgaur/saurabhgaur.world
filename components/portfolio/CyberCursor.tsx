@@ -73,13 +73,13 @@ export default function CyberCursor() {
       
       {/* Center glowing core */}
       <div 
-        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 rounded-full transition-all duration-300 ${
-          isHovering ? 'bg-orange-400 scale-150 shadow-[0_0_8px_#ff6b00]' : 'bg-cyan-400 shadow-[0_0_8px_#00f5ff]'
+        className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+          isHovering ? 'bg-orange-400 scale-150 shadow-[0_0_8px_#ff6b00]' : 'bg-[#9DFF00] shadow-[0_0_8px_#9DFF00]'
         }`} 
       />
       
       {/* Coordinate index label */}
-      <div className="absolute top-4 left-4 font-mono text-[7px] text-cyan-400/70 tracking-widest whitespace-nowrap bg-slate-950/85 px-1.5 py-0.5 rounded border border-cyan-500/10">
+      <div className="absolute top-4 left-4 font-mono text-[7px] text-[#9DFF00]/80 tracking-widest whitespace-nowrap bg-slate-950/85 px-1.5 py-0.5 rounded border border-[#9DFF00]/20">
         GRID: [{position.x}, {position.y}]
       </div>
     </div>

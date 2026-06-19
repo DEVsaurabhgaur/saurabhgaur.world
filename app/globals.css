@@ -19,8 +19,11 @@
   --accent-dim: rgba(0, 245, 255, 0.1);
   --accent2: #FF6B00;
   --accent2-dim: rgba(255, 107, 0, 0.1);
+  --accent-kiwi: #9DFF00;
+  --accent-kiwi-hover: #8EE53F;
+  --accent-kiwi-dim: rgba(157, 255, 0, 0.1);
   --purple: #7B2FBE;
-  --success: #00FF88;
+  --success: #9DFF00; /* Bind success color directly to Kiwi Neon */
   --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -545,4 +548,21 @@ body::before {
 @keyframes fuiScan {
   0% { transform: translateY(-10px); }
   100% { transform: translateY(100vh); }
+}
+
+/* Kiwi Neon Utility Classes */
+.text-kiwi {
+  color: var(--accent-kiwi) !important;
+}
+.bg-kiwi {
+  background-color: var(--accent-kiwi) !important;
+}
+.border-kiwi {
+  border-color: var(--accent-kiwi) !important;
+}
+.shadow-kiwi {
+  box-shadow: 0 0 10px var(--accent-kiwi), 0 0 20px var(--accent-kiwi-dim) !important;
+}
+.neon-glow-kiwi {
+  text-shadow: 0 0 8px rgba(157, 255, 0, 0.8), 0 0 20px rgba(157, 255, 0, 0.3) !important;
 }
