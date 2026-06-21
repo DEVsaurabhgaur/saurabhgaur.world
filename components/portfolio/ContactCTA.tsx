@@ -87,7 +87,7 @@ export default function ContactCTA() {
               key={label}
               href={href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`inline-flex items-center gap-2 px-4 py-2.5 rounded clip-cyber-sm text-sm font-mono transition-all duration-200 ${hoverClass} hover:-translate-y-0.5`}
               style={{
                 border: '1px solid var(--border)',
