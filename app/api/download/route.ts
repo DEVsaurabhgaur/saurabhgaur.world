@@ -8,6 +8,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Missing token' }, { status: 400 })
   }
 
+  // Validate token format to prevent enumeration / injection (UUID or hex-like, max 128 chars)
+  if (!/^[a-zA-Z0-9_-]{8,128}$/.test(token)) {
+    return NextResponse.json({ error: 'Invalid token format' }, { status: 400 })
+  }
+
   const supabase = createServerClient()
 
   // 1. Look up token
