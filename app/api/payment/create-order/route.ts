@@ -10,6 +10,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing items or email' }, { status: 400 })
     }
 
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(buyer_email)) || String(buyer_email).length > 254) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+    }
+
+    // Prevent oversized cart abuse
+    if (!Array.isArray(items) || items.length > 50) {
+      return NextResponse.json({ error: 'Cart size limit exceeded' }, { status: 400 })
+    }
+
     const supabase = createServerClient()
 
     // Validate products + fetch server-side prices (never trust client prices)
