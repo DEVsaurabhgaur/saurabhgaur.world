@@ -75,13 +75,13 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  opacity: 0.3;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-kiwi));
   border-radius: 2px;
+  opacity: 0.5;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
+  background: linear-gradient(to bottom, var(--accent-hover), var(--accent-kiwi-hover));
 }
 
 ::selection {
@@ -208,6 +208,13 @@ body::before {
 
   to {
     opacity: 1
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 
@@ -565,4 +572,42 @@ body::before {
 }
 .neon-glow-kiwi {
   text-shadow: 0 0 8px rgba(157, 255, 0, 0.8), 0 0 20px rgba(157, 255, 0, 0.3) !important;
+}
+
+/* Card glass shine on hover */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(0, 245, 255, 0.04) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  opacity: 1;
+}
+
+/* Cursor click pulse animation */
+@keyframes cursorClickPulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+}
+
+/* Smooth reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
