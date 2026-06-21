@@ -209,7 +209,9 @@ export default function HeroSection() {
 
     type Particle = { x: number; y: number; vx: number; vy: number; opacity: number; color: string; size: number }
     const COLORS = ['0, 245, 255', '255, 107, 0', '123, 47, 190']
-    const PARTICLE_COUNT = 80
+    // Reduce particle count on lower-end devices
+    const isMobilePref = window.matchMedia('(max-width: 768px)').matches
+    const PARTICLE_COUNT = isMobilePref ? 35 : 80
     const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -308,14 +310,33 @@ export default function HeroSection() {
 
           {/* Status Badge */}
           <div
-            className="inline-flex items-center gap-2.5 px-4 py-2 rounded clip-cyber-sm select-none hero-enter"
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded clip-cyber-sm select-none hero-enter group cursor-default"
             style={{
               background: 'rgba(157, 255, 0, 0.04)',
               border: '1px solid rgba(157, 255, 0, 0.25)',
               fontFamily: 'var(--font-mono)',
               animationDelay: '0ms',
-            }}>
-            <span className="w-2 h-2 rounded-full" style={{ background: '#9DFF00', boxShadow: '0 0 8px #9DFF00', animation: 'blink 1.5s ease-in-out infinite' }} />
+              transition: 'background 0.3s, border-color 0.3s, box-shadow 0.3s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(157, 255, 0, 0.08)'
+              e.currentTarget.style.borderColor = 'rgba(157, 255, 0, 0.5)'
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(157, 255, 0, 0.15)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(157, 255, 0, 0.04)'
+              e.currentTarget.style.borderColor = 'rgba(157, 255, 0, 0.25)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          >
+            {/* Ping animation wrapper */}
+            <span className="relative flex items-center justify-center">
+              <span
+                className="absolute inline-flex h-full w-full rounded-full opacity-75"
+                style={{ background: '#9DFF00', animation: 'ping 1.5s cubic-bezier(0,0,0.2,1) infinite' }}
+              />
+              <span className="w-2 h-2 rounded-full relative" style={{ background: '#9DFF00', boxShadow: '0 0 8px #9DFF00' }} />
+            </span>
             <span className="text-[10px] tracking-widest uppercase font-bold text-kiwi">
               INDEPENDENT AI PRODUCT DEVELOPER · OPEN TO REMOTE
             </span>
