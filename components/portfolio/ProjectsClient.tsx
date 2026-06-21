@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Folder, FolderOpen, FileCode, Shield, Calendar, GitBranch, ExternalLink, Activity, Search, Star, GitFork, Cpu } from 'lucide-react'
 import { Project } from '@/types/project'
 import { playClick } from '@/lib/audio'
@@ -96,30 +96,36 @@ export default function ProjectsClient({ projects }: Props) {
 
   // Fetch repositories on mount
   useEffect(() => {
+    let cancelled = false
     async function loadRepos() {
       setLoadingRepos(true)
       try {
         const res = await fetch('https://api.github.com/users/DEVsaurabhgaur/repos?sort=updated&per_page=50')
         if (!res.ok) throw new Error('API Sync Failed')
         const data = await res.json()
-        if (Array.isArray(data)) {
+        if (!cancelled && Array.isArray(data)) {
           setRepos(data)
         }
       } catch (e) {
-        setReposError('Offline Build Mode or Network Blocked')
+        if (!cancelled) setReposError('Offline Build Mode or Network Blocked')
       } finally {
-        setLoadingRepos(false)
+        if (!cancelled) setLoadingRepos(false)
       }
     }
     loadRepos()
+    return () => { cancelled = true }
   }, [])
 
-  // Filter dynamic repo listing
-  const filteredRepos = repos.filter(
-    (r) =>
-      r.name.toLowerCase().includes(githubSearch.toLowerCase()) ||
-      (r.description && r.description.toLowerCase().includes(githubSearch.toLowerCase()))
-  )
+  // Memoize filtered repo list
+  const filteredRepos = useMemo(() => {
+    const q = githubSearch.toLowerCase()
+    if (!q) return repos
+    return repos.filter(
+      (r) =>
+        r.name.toLowerCase().includes(q) ||
+        (r.description && r.description.toLowerCase().includes(q))
+    )
+  }, [repos, githubSearch])
 
   const selectedCoreProject = activeNode.type === 'core' 
     ? projects.find((p) => p.slug === activeNode.slug) 
@@ -206,7 +212,7 @@ export default function ProjectsClient({ projects }: Props) {
                     <input
                       type="text"
                       value={githubSearch}
-                      onChange={(e) => setSearch(e.target.value)}
+                      onChange={(e) => setGithubSearch(e.target.value)}
                       placeholder="FILTER REPOS..."
                       onClick={(e) => e.stopPropagation()}
                       className="w-full pl-6 pr-2 py-1 bg-slate-950/80 border border-slate-800 rounded outline-none text-[9px] font-mono tracking-widest text-cyan-400 placeholder-slate-600 focus:border-cyan-500/30 transition-colors"
@@ -327,7 +333,7 @@ export default function ProjectsClient({ projects }: Props) {
                       <a 
                         href={selectedCoreProject.githubUrl} 
                         target="_blank" 
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="p-1.5 border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/15 rounded text-cyan-400 hover:text-white transition-all duration-150"
                         title="Open Source Repository"
                       >
@@ -338,7 +344,7 @@ export default function ProjectsClient({ projects }: Props) {
                       <a 
                         href={selectedCoreProject.liveUrl} 
                         target="_blank" 
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="p-1.5 border border-cyan-500/20 bg-cyan-500/5 hover:bg-cyan-500/15 rounded text-cyan-400 hover:text-white transition-all duration-150"
                         title="Launch Live Target"
                       >
@@ -414,7 +420,7 @@ export default function ProjectsClient({ projects }: Props) {
                   <a
                     href={selectedGithubRepo.html_url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-orange-500/20 bg-orange-500/5 hover:bg-orange-500/15 rounded text-orange-400 hover:text-white transition-all duration-150"
                   >
                     <GitBranch size={12} />
