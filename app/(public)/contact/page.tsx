@@ -14,6 +14,14 @@ export default function ContactPage() {
       setError('Please fill in all required fields.')
       return
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      setError('Please enter a valid email address.')
+      return
+    }
+    if (form.message.length > 5000) {
+      setError('Message is too long (max 5000 characters).')
+      return
+    }
     setLoading(true)
     setError(null)
 
@@ -23,7 +31,8 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      if (!res.ok) throw new Error('Failed to send message.')
+      const data = await res.json()
+      if (!res.ok) throw new Error(data?.error || 'Failed to send message.')
       setSent(true)
     } catch (e: any) {
       setError(e.message)
