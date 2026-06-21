@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { Folder, Star, GitFork, Search, ExternalLink } from 'lucide-react'
 import { playClick } from '@/lib/audio'
 
@@ -15,64 +15,95 @@ type Repo = {
   updated_at: string
 }
 
+const LANG_COLORS: Record<string, string> = {
+  python: '#00FF88',
+  typescript: '#00D8FF',
+  javascript: '#F59E0B',
+  css: '#8B5CF6',
+  html: '#EF4444',
+  shell: '#E8593C',
+}
+
+function getLangColor(lang: string | null): string {
+  if (!lang) return '#555'
+  return LANG_COLORS[lang.toLowerCase()] ?? '#7A9BB5'
+}
+
+function getLangGlow(lang: string | null): string {
+  if (!lang) return 'none'
+  const c = LANG_COLORS[lang.toLowerCase()] ?? '#7A9BB5'
+  return `0 0 6px ${c}80`
+}
+
 export default function GitHubRepos() {
   const [repos, setRepos] = useState<Repo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Debounce search to avoid filtering on every keystroke
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value
+    setSearch(val)
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => setDebouncedSearch(val), 200)
+  }, [])
 
   useEffect(() => {
+    let cancelled = false
     async function fetchRepos() {
       try {
-        const res = await fetch('https://api.github.com/users/DEVsaurabhgaur/repos?sort=updated&per_page=100')
+        const res = await fetch(
+          'https://api.github.com/users/DEVsaurabhgaur/repos?sort=updated&per_page=100',
+          { next: { revalidate: 300 } } // cache for 5 min
+        )
         if (!res.ok) throw new Error('Failed to retrieve GitHub repository array.')
-        const data = await res.json()
-        if (Array.isArray(data)) {
-          setRepos(data)
-        } else {
-          throw new Error('Invalid registry data structure returned.')
+        const data: unknown = await res.json()
+        if (!cancelled) {
+          if (Array.isArray(data)) {
+            setRepos(data as Repo[])
+          } else {
+            throw new Error('Invalid registry data structure returned.')
+          }
         }
       } catch (e: any) {
-        setError(e.message)
+        if (!cancelled) setError(e.message)
       } finally {
-        setLoading(false)
+        if (!cancelled) setLoading(false)
       }
     }
     fetchRepos()
+    return () => { cancelled = true }
   }, [])
 
-  const filtered = repos.filter((r) =>
-    r.name.toLowerCase().includes(search.toLowerCase()) ||
-    (r.description && r.description.toLowerCase().includes(search.toLowerCase()))
-  )
-
-  const getLangColor = (lang: string | null) => {
-    if (!lang) return '#777'
-    switch (lang.toLowerCase()) {
-      case 'python': return '#00FF88'
-      case 'typescript': return '#00D8FF'
-      case 'javascript': return '#F59E0B'
-      case 'css': return '#8B5CF6'
-      case 'html': return '#EF4444'
-      case 'shell': return '#E8593C'
-      default: return '#7A9BB5'
-    }
-  }
+  // Memoize filtered repos — only recomputes when repos or debouncedSearch changes
+  const filtered = useMemo(() => {
+    const q = debouncedSearch.toLowerCase()
+    if (!q) return repos
+    return repos.filter(
+      (r) =>
+        r.name.toLowerCase().includes(q) ||
+        (r.description && r.description.toLowerCase().includes(q))
+    )
+  }, [repos, debouncedSearch])
 
   return (
     <div className="space-y-8">
-      {/* Search Input bar */}
+      {/* Search bar */}
       <div className="relative max-w-md select-none">
         <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-cyan-500/50">
           <Search size={14} />
         </span>
         <input
-          type="text"
+          type="search"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           placeholder="SEARCH LIVE REPOSITORY ARCHIVES..."
           className="w-full pl-9 pr-4 py-2 bg-slate-950/60 border border-slate-800 rounded outline-none text-xs font-mono tracking-widest text-cyan-400 placeholder-slate-600 focus:border-cyan-500/40 transition-colors"
           style={{ fontFamily: 'var(--font-mono)' }}
+          aria-label="Search repositories"
         />
       </div>
 
@@ -103,15 +134,19 @@ export default function GitHubRepos() {
               key={repo.id}
               href={repo.html_url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group block card p-5 relative overflow-hidden transition-all duration-300 clip-cyber-sm border border-slate-850 hover:border-cyan-500/30 bg-[#090f16]/40 cyber-card-scanner"
               onMouseEnter={playClick}
             >
+              {/* Shine overlay */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ background: 'linear-gradient(135deg, rgba(0,245,255,0.03) 0%, transparent 60%)' }} />
+
               <div className="flex items-start justify-between mb-4">
-                <span className="p-2 rounded bg-cyan-950/20 border border-cyan-500/10 text-cyan-400 group-hover:text-white transition-colors duration-200">
+                <span className="p-2 rounded bg-cyan-950/20 border border-cyan-500/10 text-cyan-400 group-hover:text-white group-hover:border-cyan-500/30 transition-all duration-200">
                   <Folder size={16} />
                 </span>
-                <span className="text-slate-500 hover:text-cyan-400 transition-colors">
+                <span className="text-slate-500 group-hover:text-cyan-400 transition-colors">
                   <ExternalLink size={14} />
                 </span>
               </div>
@@ -125,23 +160,24 @@ export default function GitHubRepos() {
               </p>
 
               <div className="flex items-center gap-4 pt-3.5 border-t border-slate-800/60 text-[10px] font-mono text-slate-500">
-                {/* Language */}
                 {repo.language && (
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: getLangColor(repo.language) }} />
-                    {repo.language}
+                  <span className="flex items-center gap-1.5">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{
+                        backgroundColor: getLangColor(repo.language),
+                        boxShadow: getLangGlow(repo.language),
+                      }}
+                    />
+                    <span style={{ color: getLangColor(repo.language) }}>{repo.language}</span>
                   </span>
                 )}
-                
-                {/* Stars */}
                 {repo.stargazers_count > 0 && (
                   <span className="flex items-center gap-1">
                     <Star size={10} className="text-amber-500" />
                     {repo.stargazers_count}
                   </span>
                 )}
-
-                {/* Forks */}
                 {repo.forks_count > 0 && (
                   <span className="flex items-center gap-1">
                     <GitFork size={10} />
