@@ -116,7 +116,7 @@ export default function SkillsGrid() {
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center px-3 py-1 rounded text-xs font-mono transition-all duration-200 clip-cyber-sm hover:scale-105 border bg-slate-900/40 select-none cursor-pointer hover:bg-slate-950/60"
+                    className="inline-flex items-center px-3 py-1 rounded text-xs font-mono transition-all duration-200 clip-cyber-sm hover:scale-105 border bg-slate-900/40 select-none cursor-pointer hover:bg-slate-950/60 group/skill"
                     style={{
                       fontFamily: 'var(--font-mono)',
                       borderColor: `${group.color}25`,
@@ -128,7 +128,7 @@ export default function SkillsGrid() {
                     }}
                   >
                     <span 
-                      className="w-1.5 h-1.5 rounded-full mr-2 opacity-60 animate-ping shrink-0" 
+                      className="w-1.5 h-1.5 rounded-full mr-2 opacity-70 shrink-0 group-hover/skill:animate-ping" 
                       style={{ backgroundColor: group.color }} 
                     />
                     {skill}
