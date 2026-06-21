@@ -140,14 +140,14 @@ export default function AboutSection() {
               {STATS.map(({ value, label, percentage, color }) => (
                 <div 
                   key={label} 
-                  className="relative card p-5 bg-[#090f16]/60 border border-slate-800 clip-cyber-sm cyber-corners select-none group transition-all duration-300 hover:border-cyan-500/30"
+                  className="relative card card-shine p-5 bg-[#090f16]/60 border border-slate-800 clip-cyber-sm cyber-corners select-none group transition-all duration-300 hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(0,245,255,0.06)]"
                   onMouseEnter={playClick}
                 >
                   <span className="absolute top-2 right-2 text-[9px] font-mono text-slate-700">NODE_0x{percentage}</span>
 
                   <div 
-                    className="text-3xl font-display tracking-wide mb-1 transition-all duration-300 group-hover:scale-105"
-                    style={{ fontFamily: 'var(--font-display)', color: color, textShadow: `0 0 10px ${color}30` }}
+                    className="text-3xl font-display tracking-wide mb-1 transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-sm"
+                    style={{ fontFamily: 'var(--font-display)', color: color, textShadow: `0 0 15px ${color}50` }}
                   >
                     {value}
                   </div>
@@ -162,7 +162,7 @@ export default function AboutSection() {
                       style={{ 
                         width: `${percentage}%`,
                         backgroundColor: color,
-                        boxShadow: `0 0 6px ${color}`
+                        boxShadow: `0 0 8px ${color}`,
                       }}
                     />
                   </div>
@@ -184,8 +184,8 @@ export default function AboutSection() {
                     key={cert.name} 
                     href={cert.url}
                     target="_blank" 
-                    rel="noreferrer"
-                    className="relative card p-3 flex items-center gap-3 transition-all duration-300 hover:border-emerald-500/40 bg-[#090f16]/60 border border-slate-800 clip-cyber-sm group"
+                    rel="noopener noreferrer"
+                    className="relative card card-shine p-3 flex items-center gap-3 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-[0_0_12px_rgba(0,255,136,0.06)] bg-[#090f16]/60 border border-slate-800 clip-cyber-sm group"
                     onMouseEnter={playClick}
                   >
                     <div 
