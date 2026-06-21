@@ -122,7 +122,7 @@ export default function ExperienceSection() {
 
                 {/* Content card */}
                 <div
-                  className="flex-1 card p-6 bg-[#090f16]/60 border clip-cyber-sm transition-all duration-300"
+                  className="flex-1 card card-shine p-6 bg-[#090f16]/60 border clip-cyber-sm transition-all duration-300"
                   style={{
                     borderColor: exp.color === 'var(--accent)' ? 'rgba(0,245,255,0.2)' : `${exp.color}20`,
                   }}
