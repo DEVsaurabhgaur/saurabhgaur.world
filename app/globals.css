@@ -624,3 +624,14 @@ body::before {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Scroll margin for anchored sections (fixes nav overlap) */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Focus-within highlight for form groups */
+.form-group:focus-within label {
+  color: var(--accent);
+  transition: color 0.2s ease;
+}
