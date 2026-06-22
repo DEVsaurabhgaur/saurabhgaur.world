@@ -488,7 +488,11 @@ export default function HeroSection() {
               <span className="text-cyan-500/70 border-b border-cyan-500/10 pb-1.5 block font-bold tracking-wider">{'>>'} SYSTEM EVENT LOGGER:</span>
               <div className="space-y-1">
                 {hudLogs.map((log, index) => (
-                  <div key={index} className="truncate text-kiwi/90 flex gap-2">
+                  <div
+                    key={`${log}-${index}`}
+                    className="truncate text-kiwi/90 flex gap-2"
+                    style={{ animation: index === 0 ? 'fadeIn 0.4s ease forwards' : 'none', opacity: index === 0 ? 0 : 1 }}
+                  >
                     <span className="text-cyan-500/50 select-none">❯</span>
                     <span className="truncate">{log}</span>
                   </div>
