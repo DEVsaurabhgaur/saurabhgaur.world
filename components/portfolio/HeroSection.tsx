@@ -209,9 +209,10 @@ export default function HeroSection() {
 
     type Particle = { x: number; y: number; vx: number; vy: number; opacity: number; color: string; size: number }
     const COLORS = ['0, 245, 255', '255, 107, 0', '123, 47, 190']
-    // Reduce particle count on lower-end devices
+    // Reduce particle count on lower-end devices; honour prefers-reduced-motion
     const isMobilePref = window.matchMedia('(max-width: 768px)').matches
-    const PARTICLE_COUNT = isMobilePref ? 35 : 80
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const PARTICLE_COUNT = prefersReduced ? 0 : isMobilePref ? 25 : 70
     const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
