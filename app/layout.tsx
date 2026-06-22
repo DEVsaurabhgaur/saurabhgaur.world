@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   },
   description:
     'AI/ML Engineer specialising in LLM systems, agentic RAG pipelines, and frontier model evaluation. Also an AI artist selling digital art.',
+  keywords: ['AI Engineer', 'ML Engineer', 'LLM Systems', 'Agentic AI', 'RAG Pipeline', 'LangGraph', 'Gemini API', 'Next.js', 'AI Art', 'Scale AI'],
+  authors: [{ name: 'Saurabh Kumar Gaur', url: 'https://saurabhgaur.world' }],
+  creator: 'Saurabh Kumar Gaur',
   openGraph: {
     type: 'website',
     url: 'https://saurabhgaur.world',
