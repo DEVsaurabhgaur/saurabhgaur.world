@@ -36,6 +36,12 @@ const nextConfig = {
   },
   // Compress output
   compress: true,
+  // Remove X-Powered-By header for security
+  poweredByHeader: false,
+  // Experimental: optimise package imports for tree-shaking
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
 }
 
 export default nextConfig
