@@ -223,13 +223,17 @@ export default function HeroSection() {
     }))
 
     let mouse = { x: -1000, y: -1000 }
+    let lastMoveTime = 0
     const handleMouseMove = (e: MouseEvent) => {
+      const now = Date.now()
+      if (now - lastMoveTime < 16) return // ~60fps cap
+      lastMoveTime = now
       const rect = canvas.getBoundingClientRect()
       mouse.x = e.clientX - rect.left
       mouse.y = e.clientY - rect.top
     }
     const handleMouseLeave = () => { mouse.x = -1000; mouse.y = -1000 }
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     window.addEventListener('mouseleave', handleMouseLeave)
 
     const draw = () => {
@@ -272,11 +276,11 @@ export default function HeroSection() {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 100) {
+          if (dist < 80) {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(0, 245, 255, ${0.07 * (1 - dist / 100)})`
+            ctx.strokeStyle = `rgba(0, 245, 255, ${0.07 * (1 - dist / 80)})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
