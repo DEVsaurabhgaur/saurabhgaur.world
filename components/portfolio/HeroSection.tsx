@@ -414,7 +414,7 @@ export default function HeroSection() {
         </div>
 
         {/* Right Column: HUD */}
-        <div className="lg:col-span-5 w-full select-none hero-enter" style={{ animationDelay: '200ms' }}>
+        <div className="lg:col-span-5 w-full select-none hero-enter" style={{ animationDelay: '200ms' }} role="complementary" aria-label="System telemetry dashboard">
           <div className="relative card p-6 bg-[#090f16]/80 border border-cyan-500/20 clip-cyber glow-glow cyber-corners">
             <div className="absolute inset-0 pointer-events-none crt-screen rounded-lg" style={{
               background: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 245, 255, 0.015) 3px, rgba(0, 245, 255, 0.015) 6px)'
