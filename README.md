@@ -49,6 +49,25 @@ See full setup guide: ask Claude at https://claude.ai
 
 Visit `/login` and enter your `ADMIN_SECRET` to access the admin panel at `/admin`.
 
+## Performance & SEO
+
+Key optimisations applied to this build:
+
+| Area | Detail |
+|---|---|
+| Canvas particles | 70 desktop / 25 mobile; 0 on `prefers-reduced-motion` |
+| Mousemove | Throttled to ~60fps via `Date.now()` guard + `passive` listener |
+| Particle connections | Max draw distance reduced 100px → 80px (O(n²) savings) |
+| GPU compositing | `will-change: transform` on radar canvas; `will-change: transform, box-shadow` on cards/buttons |
+| Off-screen render | `content-visibility: auto` on non-hero sections |
+| Fonts | Google Fonts `display=swap` prevents FOIT |
+| Network | `preconnect` for fonts; `dns-prefetch` for Supabase CDN |
+| Bundle | `optimizePackageImports: ['lucide-react']` for tree-shaking |
+| SEO | JSON-LD Person schema, keywords, authors, creator in metadata |
+| Sitemap | Art page priority 0.95 / daily; projects weekly |
+| a11y | Skip-to-content link, WCAG 2.1 AA focus ring (2px), `prefers-reduced-motion` scroll guard |
+| Security | `poweredByHeader: false` removes X-Powered-By fingerprint |
+
 ## License
 
 Personal use. All art and content © Saurabh Kumar Gaur.
