@@ -465,7 +465,7 @@ export default function HeroSection() {
             {/* Radar + Details */}
             <div className="flex flex-col sm:flex-row items-center gap-5 mb-6">
               <div className="flex items-center justify-center p-2 border border-cyan-500/15 bg-slate-950/30 rounded">
-                <canvas ref={radarCanvasRef} className="w-36 h-36" />
+                <canvas ref={radarCanvasRef} className="w-36 h-36" aria-hidden style={{ willChange: 'transform' }} />
               </div>
               <div className="flex-1 font-mono text-[10px] space-y-2 text-slate-400 w-full">
                 <div className="flex items-center gap-1.5 bg-slate-950/30 border border-slate-800 p-1.5 rounded">
