@@ -144,7 +144,7 @@ export default function HeroSection() {
       ctx.lineTo(cx, cy + maxRadius)
       ctx.stroke()
 
-      angle = (angle + 0.015) % (Math.PI * 2)
+      angle = (angle + 0.018) % (Math.PI * 2)
 
       ctx.beginPath()
       ctx.moveTo(cx, cy)
