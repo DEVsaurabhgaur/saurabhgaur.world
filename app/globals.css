@@ -635,3 +635,9 @@ section[id] {
   color: var(--accent);
   transition: color 0.2s ease;
 }
+
+/* content-visibility: skip rendering cost for off-screen sections */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
