@@ -63,11 +63,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-[#0A0A0A] text-[#F0F0F0] antialiased">
+        {/* Skip to main content for keyboard/screen-reader users */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded focus:text-sm focus:font-mono focus:uppercase"
+          style={{ background: 'var(--accent)', color: '#000' }}
+        >
+          Skip to content
+        </a>
         <CartProvider>
           <CyberCursor />
           <CyberHUDController />
           <Navbar />
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </CartProvider>
       </body>
