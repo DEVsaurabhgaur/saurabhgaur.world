@@ -36,12 +36,31 @@ export const viewport: Viewport = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Saurabh Kumar Gaur',
+    url: 'https://saurabhgaur.world',
+    jobTitle: 'AI/ML Engineer',
+    description: 'AI Engineer specialising in LLM systems, agentic RAG pipelines, and frontier model evaluation.',
+    sameAs: [
+      'https://github.com/saurabhgaur',
+      'https://linkedin.com/in/saurabhgaur',
+    ],
+    knowsAbout: ['LangGraph', 'RAG Systems', 'Gemini API', 'LLM Evaluation', 'Agentic AI', 'Next.js', 'FastAPI'],
+  }
+
   return (
     <html lang="en">
       {/* Resource hints: preconnect to Google Fonts CDN to reduce DNS lookup latency */}
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="bg-[#0A0A0A] text-[#F0F0F0] antialiased">
         <CartProvider>
