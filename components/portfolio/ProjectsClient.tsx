@@ -221,7 +221,7 @@ export default function ProjectsClient({ projects }: Props) {
 
                   {loadingRepos && (
                     <div className="py-4 text-center text-[10px] text-cyan-400 animate-pulse font-mono tracking-widest">
-                      // SYNCING LIVE FEED...
+                      {"// SYNCING LIVE FEED..."}
                     </div>
                   )}
 
