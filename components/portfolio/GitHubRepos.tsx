@@ -110,7 +110,7 @@ export default function GitHubRepos() {
       {loading && (
         <div className="py-24 text-center space-y-3 select-none">
           <div className="inline-block w-8 h-8 border-2 rounded-full border-t-cyan-400 border-slate-800 animate-spin" />
-          <p className="text-xs font-mono text-cyan-400/80 tracking-widest">// SYNCHRONIZING REPOSITORY INVENTORY...</p>
+          <p className="text-xs font-mono text-cyan-400/80 tracking-widest">{"// SYNCHRONIZING REPOSITORY INVENTORY..."}</p>
         </div>
       )}
 
