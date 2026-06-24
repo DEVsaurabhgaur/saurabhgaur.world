@@ -14,7 +14,7 @@ const mockSupabase = {
     }
     return queryChain
   }
-} as any
+} as unknown as ReturnType<typeof createClient>
 
 /** Server-side client with service role key — full DB access, bypasses RLS */
 export function createServerClient() {
