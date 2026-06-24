@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     const supabase = createServerClient()
 
     // Validate products + fetch server-side prices (never trust client prices)
-    const productIds = items.map((i: any) => i.product_id)
+    const productIds = items.map((i: { product_id: string }) => i.product_id)
     const { data: products, error } = await supabase
       .from('art_products')
       .select('id, price_inr, is_published')
