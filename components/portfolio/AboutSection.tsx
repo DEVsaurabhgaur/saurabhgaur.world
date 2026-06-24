@@ -24,8 +24,16 @@ const CERTS = [
     name: 'Designing & Implementing DevOps Solutions (AZ-400)',
     issuer: 'Microsoft — PearsonVue',
     date: 'Jun 19, 2026',
-    url: '#',
+    url: 'https://learn.microsoft.com/en-gb/users/saurabhgaur-8654/transcript?tab=credentials-tab',
     badge: '✅',
+    color: '#00A4EF',
+  },
+  {
+    name: 'GitHub Copilot Fundamentals',
+    issuer: 'GitHub × Microsoft Learn',
+    date: 'Jun 2, 2026',
+    url: 'https://learn.microsoft.com/en-gb/users/saurabhgaur-8654/transcript?tab=credentials-tab',
+    badge: '🤖',
     color: '#00A4EF',
   },
   {
