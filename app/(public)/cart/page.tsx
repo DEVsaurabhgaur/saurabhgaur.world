@@ -8,7 +8,9 @@ import { useCart } from '@/context/CartContext'
 import { formatPrice } from '@/lib/utils'
 
 declare global {
-  interface Window { Razorpay: any }
+  interface Window {
+    Razorpay: new (options: unknown) => { open: () => void }
+  }
 }
 
 function loadRazorpay(): Promise<boolean> {
