@@ -68,8 +68,8 @@ export default function GitHubRepos() {
             throw new Error('Invalid registry data structure returned.')
           }
         }
-      } catch (e: any) {
-        if (!cancelled) setError(e.message)
+      } catch (e) {
+        if (!cancelled) setError(e instanceof Error ? e.message : 'Unknown error')
       } finally {
         if (!cancelled) setLoading(false)
       }
