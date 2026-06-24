@@ -19,7 +19,7 @@ export default function NotFound() {
           <span style={{ color: 'var(--accent)' }}>FOUND</span>
         </h1>
         <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)' }}>
-          The page you&apos;re looking for doesn't exist or has been moved.
+          The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
