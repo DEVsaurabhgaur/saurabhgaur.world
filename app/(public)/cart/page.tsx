@@ -83,8 +83,8 @@ export default function CartPage() {
             if (!verifyRes.ok) throw new Error('Payment verification failed.')
             clear()
             router.push(`/order-success?order_id=${razorpay_order_id}`)
-          } catch (e: any) {
-            setError(e.message ?? 'Payment verification failed.')
+          } catch (e) {
+            setError(e instanceof Error ? e.message : 'Payment verification failed.')
             setLoading(false)
           }
         },
