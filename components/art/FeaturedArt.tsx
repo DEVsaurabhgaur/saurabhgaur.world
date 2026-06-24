@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { createServerClient } from '@/lib/supabase/server'
 import { ArtProduct } from '@/types/art'
@@ -67,10 +68,13 @@ export default async function FeaturedArt() {
               <Link key={product.id} href={`/art/${product.id}`}
                 className="card group overflow-hidden block" style={{ borderRadius: '8px' }}>
                 <div className="overflow-hidden" style={{ height: '200px', background: 'var(--bg-secondary)' }}>
-                  <img
+                  <Image
                     src={product.thumbnail_url}
                     alt={product.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    width={300}
+                    height={200}
+                    unoptimized
                   />
                 </div>
                 <div className="p-3">
