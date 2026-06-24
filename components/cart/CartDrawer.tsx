@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { X, ShoppingCart, Trash2 } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { formatPrice } from '@/lib/utils'
@@ -113,11 +114,13 @@ export default function CartDrawer({ open, onClose }: Props) {
                   className="shrink-0 rounded overflow-hidden"
                   style={{ width: 64, height: 64, background: 'var(--bg-primary)' }}
                 >
-                  <img
+                  <Image
                     src={product.thumbnail_url}
                     alt={product.title}
                     className="w-full h-full object-cover"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                    width={64}
+                    height={64}
+                    unoptimized
                   />
                 </div>
                 {/* Info */}
