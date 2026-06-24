@@ -57,7 +57,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="transition-all duration-150 hover:text-cyan-400 hover:scale-110"
                   style={{ color: 'var(--text-muted)' }}
