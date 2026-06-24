@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ success: true, order_id: order.id })
-  } catch (err: any) {
+  } catch (err) {
     console.error('[verify]', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
