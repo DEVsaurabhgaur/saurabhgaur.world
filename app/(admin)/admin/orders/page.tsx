@@ -1,6 +1,5 @@
 import { createServerClient } from '@/lib/supabase/server'
 import { formatPrice } from '@/lib/utils'
-import { Order } from '@/types/order'
 
 export const revalidate = 0
 
