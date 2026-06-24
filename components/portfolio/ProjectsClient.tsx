@@ -227,7 +227,7 @@ export default function ProjectsClient({ projects }: Props) {
 
                   {reposError && (
                     <div className="py-2 text-center text-[10px] text-rose-500 font-mono">
-                      // API_ERR_OFFLINE
+                      {"// API_ERR_OFFLINE"}
                     </div>
                   )}
 
