@@ -8,7 +8,7 @@ const mockSupabase = {
       order: () => queryChain,
       limit: () => queryChain,
       single: () => queryChain,
-      then: (onfulfilled: any) => {
+      then: (onfulfilled?: (value: { data: unknown[]; error: null }) => unknown) => {
         return Promise.resolve({ data: [], error: null }).then(onfulfilled)
       }
     }
