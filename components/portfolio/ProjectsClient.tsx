@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { Folder, FolderOpen, FileCode, Calendar, GitBranch, ExternalLink, Activity, Search, Star, GitFork, Cpu } from 'lucide-react'
 import { Project } from '@/types/project'
 import { playClick } from '@/lib/audio'
-import { useTextScramble } from '@/hooks/useTextScramble'
+
 import ReactMarkdown from 'react-markdown'
 
 type Props = {
@@ -92,7 +92,7 @@ export default function ProjectsClient({ projects }: Props) {
   const [reposError, setReposError] = useState<string | null>(null)
   const [githubSearch, setGithubSearch] = useState('')
 
-  const { displayText: titleText, triggerScramble: scrambleTitle } = useTextScramble('INDEXER_V4', false)
+
 
   // Fetch repositories on mount
   useEffect(() => {
