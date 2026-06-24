@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { Folder, FolderOpen, FileCode, Shield, Calendar, GitBranch, ExternalLink, Activity, Search, Star, GitFork, Cpu } from 'lucide-react'
+import { Folder, FolderOpen, FileCode, Calendar, GitBranch, ExternalLink, Activity, Search, Star, GitFork, Cpu } from 'lucide-react'
 import { Project } from '@/types/project'
 import { playClick } from '@/lib/audio'
 import { useTextScramble } from '@/hooks/useTextScramble'
