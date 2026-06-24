@@ -52,8 +52,8 @@ export default function AdminProductsPage() {
       await fetchProducts()
       setShowForm(false)
       setForm({ title: '', description: '', price_inr: '', style: '', tags: '', thumbnail_url: '', file_url: '', is_published: false })
-    } catch (e: any) {
-      setError(e.message)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'An unknown error occurred')
     } finally {
       setSaving(false)
     }
