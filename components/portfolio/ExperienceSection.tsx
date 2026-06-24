@@ -1,6 +1,6 @@
 'use client'
 
-import { Clock, MapPin, Radio, Shield, Activity } from 'lucide-react'
+import { Clock, MapPin } from 'lucide-react'
 import { playClick } from '@/lib/audio'
 
 type Experience = {
