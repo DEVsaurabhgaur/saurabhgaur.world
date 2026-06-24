@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
       amount: total,
       order_id: order.id,
     })
-  } catch (err: any) {
+  } catch (err) {
     console.error('[create-order]', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
