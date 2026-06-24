@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       tokens.push({
         product_id: item.product_id,
         token,
-        title: (item.art_products as any)?.title ?? 'Art',
+        title: ((Array.isArray(item.art_products) ? item.art_products[0] : item.art_products) as unknown as { title: string; file_url: string } | null)?.title ?? 'Art',
       })
     }
 
