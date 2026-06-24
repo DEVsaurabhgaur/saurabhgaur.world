@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowLeft, ShoppingCart, Check, Zap } from 'lucide-react'
 import { ArtProduct } from '@/types/art'
 import { useCart } from '@/context/CartContext'
@@ -46,15 +47,14 @@ export default function ArtDetailClient({ product }: Props) {
               minHeight: '400px',
             }}
           >
-            <img
+            <Image
               src={product.thumbnail_url}
               alt={product.title}
               className="w-full h-full object-contain"
               style={{ maxHeight: '70vh' }}
-              onError={(e) => {
-                const el = e.currentTarget as HTMLImageElement
-                el.style.display = 'none'
-              }}
+              width={800}
+              height={800}
+              priority
             />
           </div>
 
