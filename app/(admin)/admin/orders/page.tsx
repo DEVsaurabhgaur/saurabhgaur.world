@@ -64,10 +64,10 @@ export default async function AdminOrdersPage() {
                   </span>
                 </div>
               </div>
-              {order.order_items?.length > 0 && (
+              {order.order_items && order.order_items.length > 0 && (
                 <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
                   <div className="flex flex-wrap gap-2">
-                    {order.order_items.map((item: any) => (
+                    {order.order_items.map((item: OrderItemWithArt) => (
                       <span
                         key={item.product_id}
                         className="text-xs px-2 py-0.5 rounded"
