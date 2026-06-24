@@ -223,7 +223,7 @@ export default function HeroSection() {
       size: Math.random() * 1.5 + 0.5,
     }))
 
-    let mouse = { x: -1000, y: -1000 }
+    const mouse = { x: -1000, y: -1000 }
     let lastMoveTime = 0
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now()
