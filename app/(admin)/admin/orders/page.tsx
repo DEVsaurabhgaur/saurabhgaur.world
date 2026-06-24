@@ -1,5 +1,14 @@
 import { createServerClient } from '@/lib/supabase/server'
 import { formatPrice } from '@/lib/utils'
+import type { Order, OrderItem } from '@/types/order'
+
+type OrderItemWithArt = OrderItem & {
+  art_products: { title: string } | null
+}
+
+type OrderWithItems = Order & {
+  order_items: OrderItemWithArt[] | null
+}
 
 export const revalidate = 0
 
@@ -21,7 +30,7 @@ export default async function AdminOrdersPage() {
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>No orders yet.</p>
       ) : (
         <div className="space-y-3">
-          {orders.map((order: any) => (
+          {orders.map((order: OrderWithItems) => (
             <div
               key={order.id}
               className="p-4 rounded-xl"
