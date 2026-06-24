@@ -13,10 +13,10 @@ const nextConfig = {
     dangerouslyAllowSVG: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   // Security: add HTTP headers at the Next.js level
   async headers() {
