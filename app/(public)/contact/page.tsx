@@ -83,10 +83,10 @@ export default function ContactPage() {
         ) : (
           <div className="space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
-              {[
-                { key: 'name', label: 'Name *', placeholder: 'Your name' },
+              {([
+                { key: 'name', label: 'Name *', placeholder: 'Your name', type: 'text' },
                 { key: 'email', label: 'Email *', placeholder: 'you@example.com', type: 'email' },
-              ].map(({ key, label, placeholder, type }) => (
+              ] as const).map(({ key, label, placeholder, type }) => (
                 <div key={key}>
                   <label
                     className="block text-xs font-mono uppercase tracking-widest mb-2"
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   </label>
                   <input
                     type={type ?? 'text'}
-                    value={(form as any)[key]}
+                    value={form[key]}
                     placeholder={placeholder}
                     onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
                     className="w-full px-4 py-2.5 rounded text-sm outline-none transition-all duration-150"
