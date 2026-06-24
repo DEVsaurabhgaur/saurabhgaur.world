@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  const product = dl.art_products as any
+  const product = (Array.isArray(dl.art_products) ? dl.art_products[0] : dl.art_products) as unknown as { file_url: string; title: string } | null
   if (!product?.file_url) {
     return NextResponse.json({ error: 'File not found' }, { status: 404 })
   }
