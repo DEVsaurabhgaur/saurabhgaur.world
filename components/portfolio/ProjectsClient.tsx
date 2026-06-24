@@ -106,7 +106,7 @@ export default function ProjectsClient({ projects }: Props) {
         if (!cancelled && Array.isArray(data)) {
           setRepos(data)
         }
-      } catch (e) {
+      } catch {
         if (!cancelled) setReposError('Offline Build Mode or Network Blocked')
       } finally {
         if (!cancelled) setLoadingRepos(false)
