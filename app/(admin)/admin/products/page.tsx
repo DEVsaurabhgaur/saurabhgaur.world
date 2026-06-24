@@ -104,14 +104,14 @@ export default function AdminProductsPage() {
             New Product
           </h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            {[
-              { key: 'title', label: 'Title *', placeholder: 'Neon Samurai' },
+            {([
+              { key: 'title', label: 'Title *', placeholder: 'Neon Samurai', type: 'text' },
               { key: 'price_inr', label: 'Price (₹) *', placeholder: '299', type: 'number' },
-              { key: 'style', label: 'Style', placeholder: 'Cyberpunk' },
-              { key: 'tags', label: 'Tags (comma-separated)', placeholder: 'dark, neon, portrait' },
-              { key: 'thumbnail_url', label: 'Thumbnail URL *', placeholder: 'https://...' },
-              { key: 'file_url', label: 'File URL *', placeholder: 'https://...' },
-            ].map(({ key, label, placeholder, type }) => (
+              { key: 'style', label: 'Style', placeholder: 'Cyberpunk', type: 'text' },
+              { key: 'tags', label: 'Tags (comma-separated)', placeholder: 'dark, neon, portrait', type: 'text' },
+              { key: 'thumbnail_url', label: 'Thumbnail URL *', placeholder: 'https://...', type: 'text' },
+              { key: 'file_url', label: 'File URL *', placeholder: 'https://...', type: 'text' },
+            ] as const).map(({ key, label, placeholder, type }) => (
               <div key={key}>
                 <label className="block text-xs font-mono mb-1.5 uppercase tracking-widest"
                   style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
@@ -119,7 +119,7 @@ export default function AdminProductsPage() {
                 </label>
                 <input
                   type={type ?? 'text'}
-                  value={(form as any)[key]}
+                  value={form[key]}
                   placeholder={placeholder}
                   onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
                   className="w-full px-3 py-2 rounded text-sm outline-none"
