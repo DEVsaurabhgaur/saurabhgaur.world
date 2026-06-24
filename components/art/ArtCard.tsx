@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ShoppingCart, Check } from 'lucide-react'
 import { ArtProduct } from '@/types/art'
 import { useCart } from '@/context/CartContext'
@@ -13,6 +15,7 @@ type Props = {
 export default function ArtCard({ product }: Props) {
   const { add, isInCart } = useCart()
   const inCart = isInCart(product.id)
+  const [imgError, setImgError] = useState(false)
 
   return (
     <div
@@ -26,23 +29,31 @@ export default function ArtCard({ product }: Props) {
             background: 'var(--bg-secondary)',
             minHeight: '200px',
           }}
+          className="relative"
         >
-          <img
-            src={product.thumbnail_url}
-            alt={product.title}
-            className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            style={{ display: 'block' }}
-            onError={(e) => {
-              const el = e.currentTarget as HTMLImageElement
-              el.style.display = 'none'
-              const parent = el.parentElement!
-              parent.style.height = '220px'
-              parent.style.display = 'flex'
-              parent.style.alignItems = 'center'
-              parent.style.justifyContent = 'center'
-              parent.innerHTML = `<span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted)">${product.style ?? 'Art'}</span>`
-            }}
-          />
+          {imgError ? (
+            <div
+              className="w-full flex items-center justify-center"
+              style={{
+                height: '220px',
+              }}
+            >
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>
+                {product.style ?? 'Art'}
+              </span>
+            </div>
+          ) : (
+            <Image
+              src={product.thumbnail_url}
+              alt={product.title}
+              className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              width={400}
+              height={400}
+              unoptimized
+              onError={() => setImgError(true)}
+              style={{ display: 'block' }}
+            />
+          )}
         </div>
         {/* Price badge overlay */}
         <span
