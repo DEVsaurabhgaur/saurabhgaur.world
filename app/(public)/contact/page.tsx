@@ -77,7 +77,7 @@ export default function ContactPage() {
               MESSAGE SENT
             </h2>
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              Thanks for reaching out. I'll get back to you within 24 hours.
+              Thanks for reaching out. I&apos;ll get back to you within 24 hours.
             </p>
           </div>
         ) : (
