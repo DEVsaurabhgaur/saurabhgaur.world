@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
     })
 
     return NextResponse.json({ success: true })
-  } catch (err: any) {
+  } catch (err) {
     console.error('[contact]', err)
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
   }
