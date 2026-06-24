@@ -69,7 +69,11 @@ export default function CartPage() {
         image: '/images/og-image.jpg',
         prefill: { email },
         theme: { color: '#E8593C' },
-        handler: async (response: any) => {
+        handler: async (response: {
+          razorpay_payment_id: string
+          razorpay_order_id: string
+          razorpay_signature: string
+        }) => {
           try {
             const verifyRes = await fetch('/api/payment/verify', {
               method: 'POST',
