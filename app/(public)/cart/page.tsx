@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Trash2, ArrowLeft, ShoppingCart, Lock } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
@@ -165,11 +166,13 @@ export default function CartPage() {
                   className="shrink-0 rounded overflow-hidden"
                   style={{ width: 80, height: 80, background: 'var(--bg-secondary)' }}
                 >
-                  <img
+                  <Image
                     src={product.thumbnail_url}
                     alt={product.title}
                     className="w-full h-full object-cover"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                    width={80}
+                    height={80}
+                    unoptimized
                   />
                 </div>
                 <div className="flex-1 min-w-0">
