@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Eye, EyeOff, Trash2, Edit2, Check, X } from 'lucide-react'
+import { Plus, Eye, EyeOff, Trash2, Check, X } from 'lucide-react'
 import { ArtProduct } from '@/types/art'
 import { formatPrice } from '@/lib/utils'
 
